@@ -86,8 +86,63 @@ body {
   font-size: 12px;
 }
 
+/* Patient Information Styles */
+.patient-info {
+  margin: 24px 0;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.patient-info-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  color: var(--text);
+  text-align: center;
+}
+
+.patient-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.patient-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.patient-detail:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-weight: 500;
+  color: var(--muted);
+  font-size: 14px;
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.detail-value {
+  color: var(--text);
+  font-size: 14px;
+  text-align: right;
+  flex: 1;
+  word-break: break-word;
+}
+
 @media (min-width: 480px) {
   .office-name { font-size: 32px; }
   .subtitle { font-size: 15px; }
   .call-button { font-size: 17px; }
+  .patient-info-title { font-size: 20px; }
+  .detail-label, .detail-value { font-size: 15px; }
 }
+
+

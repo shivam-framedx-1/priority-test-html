@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Office Contact</title>
-    <link rel="stylesheet" href="./style.css" />
+    <title>Priority Connect</title>
+    <link rel="stylesheet" href="./styles.css" />
     <meta name="theme-color" content="#0f172a" />
   </head>
   <body>
@@ -12,6 +12,25 @@
       <section class="card" aria-label="Office contact">
         <h1 class="office-name">AIVA Voice Priority Connect</h1>
         <p class="subtitle">Tap the button below to call back Hospital</p>
+
+        <!-- Patient Information Section -->
+        <div class="patient-info" id="patient-info" style="display: none;">
+          <h2 class="patient-info-title">Patient Information</h2>
+          <div class="patient-details">
+            <div class="patient-detail">
+              <span class="detail-label">Patient Name:</span>
+              <span class="detail-value" id="patient-name">-</span>
+            </div>
+            <div class="patient-detail">
+              <span class="detail-label">Bed Name:</span>
+              <span class="detail-value" id="bed-name">-</span>
+            </div>
+            <div class="patient-detail">
+              <span class="detail-label">Symptoms:</span>
+              <span class="detail-value" id="symptoms">-</span>
+            </div>
+          </div>
+        </div>
 
         <!-- The phone number will be dynamically inserted here -->
         <a class="call-button" id="call-button" href="#" aria-label="Call callback number">
@@ -30,6 +49,11 @@
       const urlParams = new URLSearchParams(window.location.search);
       const callbackNumber = urlParams.get('number');
 
+      // Get patient information from URL parameters (support common variants)
+      const PatientName = urlParams.get('patientName') || urlParams.get('PatientName') || urlParams.get('name');
+      const BedNumber = urlParams.get('BedNumber') || urlParams.get('bedName') || urlParams.get('bednumber') || urlParams.get('bed') || urlParams.get('bed_name');
+      const Symptoms = urlParams.get('symptoms') || urlParams.get('Symptoms');
+
       // If the callback number exists in the URL, update the phone number dynamically
       if (callbackNumber) {
         // Update the phone number in the href and the text
@@ -37,6 +61,23 @@
         document.getElementById('phone-text').innerText = `Call ${callbackNumber}`;
       } else {
         document.getElementById('phone-text').innerText = "No callback number provided.";
+      }
+
+      // Update patient information if any patient details are provided
+      if (PatientName || BedNumber || Symptoms) {
+        const patientInfoSection = document.getElementById('patient-info');
+        patientInfoSection.style.display = 'block';
+
+        // Update patient details
+        if (PatientName) {
+          document.getElementById('patient-name').textContent = PatientName;
+        }
+        if (BedNumber) {
+          document.getElementById('bed-name').textContent = BedNumber;
+        }
+        if (Symptoms) {
+          document.getElementById('symptoms').textContent = Symptoms;
+        }
       }
     </script>
   </body>
